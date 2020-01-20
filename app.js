@@ -23,12 +23,15 @@ function get(url) {
 
 function createImageOfTheDay(image) {
     const h2 = document.createElement('h2')
+    h2.classList.add('iotd-title')
     h2.textContent = image.title
 
     const img = document.createElement('img')
+    img.classList.add('daily-image')
     img.src = image.url
 
     const p = document.createElement('p')
+    p.classList.add('iotd-description')
     p.textContent = image.explanation
 
     imageSection.append(h2, img, p)
