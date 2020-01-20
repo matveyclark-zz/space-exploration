@@ -11,6 +11,8 @@ const asteroidContainer = document.querySelector('.wrapper.asteroids')
 const roverPhotosContainer = document.querySelector('.rover-photos')
 const astronaughtContainer = document.querySelector('.wrapper.astros')
 const ctaBtn = document.querySelector('.main-btn')
+const asteroidUnderline = document.querySelector('.underline')
+const earthIcon = document.querySelector('.earth-icon')
 
 // api
 
@@ -64,11 +66,6 @@ function createAsteroid(asteroid) {
     
     div.append(img)
     asteroidContainer.append(div)
-
-    img.addEventListener('click', () => {
-        let tl = gsap.timeline()
-        tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 5)", y: "random(-300, 300, 5)", ease: 'elastic', rotate: 360})
-    })
 }
 
     // render asteroids
@@ -148,6 +145,17 @@ ctaBtn.addEventListener("mouseover", (e) => {
 
 ctaBtn.addEventListener('mouseout', (e) => {
     gsap.to(".main-illustration", 2, {y: 0, x: 0, rotate: -45, ease: "elastic"})
+})
+
+asteroidUnderline.addEventListener('click', (e) => {
+    e.target.parentElement.style.display = 'none'
+    earthIcon.style.display = 'block'
+    // asteroidDiv.style.display = 'block'
+    let tl = gsap.timeline()
+    tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 20)", y: "random(-300, 300, 20)", opacity: 1, stagger: .1, ease: 'elastic', rotate: 360})
+    document.querySelectorAll('.asteroid').forEach(asteroid => {
+        asteroid.style.display = 'block'
+    })
 })
 
 
