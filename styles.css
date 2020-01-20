@@ -1,3 +1,5 @@
+/* Base */
+
 *,
 *::before,
 *::after {
@@ -14,6 +16,8 @@ html {
     width: 95%;
     margin: 0 auto;
 }
+
+/* Hero section */
 
 .hero {
     padding-top: 5em;
@@ -44,4 +48,16 @@ html {
 
 .asteroid-icon {
     width: 100%;
+}
+
+/* Rover photos section */
+
+.rover-photos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rover-photo {
+    width: 33%;
+    padding: .5em;
 }

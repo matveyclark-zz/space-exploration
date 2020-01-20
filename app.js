@@ -3,8 +3,10 @@
 let today = new Date()
 const pictureOfTheDayURI = 'https://api.nasa.gov/planetary/apod?api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe'
 const asteroidsURI = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${today.getFullYear()}-0${(today.getMonth()+1)}-0${today.getDate()}&end_date=${today.getFullYear()}-${(0 + today.getMonth()+1)}-${today.getDate() + 1}&api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe`
+const marsRoverURI = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=2539&page=2&api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe'
 const imageSection = document.querySelector('.iotd')
 const asteroidContainer = document.querySelector('.asteroid')
+const roverPhotosContainer = document.querySelector('.rover-photos')
 
 // api
 
@@ -14,6 +16,8 @@ function get(url) {
 
 
 // functions
+
+    // create image of the day 
 
 function createImageOfTheDay(image) {
     const h2 = document.createElement('h2')
@@ -27,6 +31,14 @@ function createImageOfTheDay(image) {
 
     imageSection.append(h2, img, p)
 }
+
+    // render image of the day 
+
+function renderImage() {
+    get(pictureOfTheDayURI).then(createImageOfTheDay)
+}
+
+    // create asteroids
 
 function createAsteroid(asteroid) {
     const p = document.createElement('p')
@@ -43,14 +55,30 @@ function createAsteroid(asteroid) {
     asteroidContainer.append(p, img)
 }
 
-function renderImage() {
-    get(pictureOfTheDayURI).then(createImageOfTheDay)
-}
+    // render asteroids
 
 function renderAsteroids() {
     get(asteroidsURI).then(obj => {
         let asteroids = obj.near_earth_objects[Object.keys(obj.near_earth_objects)[0]].concat(obj.near_earth_objects[Object.keys(obj.near_earth_objects)[1]])
         asteroids.forEach(createAsteroid)
+    })
+}
+
+    // create mars rover photos
+
+function createRoverPhoto(photo) {
+    const img = document.createElement('img')
+    img.classList.add('rover-photo')
+    img.src = photo.img_src
+
+    roverPhotosContainer.append(img)
+}
+
+    // render mars rover photos
+
+function renderRoverPhotos() {
+    get(marsRoverURI).then(obj => {
+        obj.photos.forEach(createRoverPhoto)
     })
 }
 
