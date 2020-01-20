@@ -118,5 +118,16 @@ function renderAstronaughts() {
     })
 }
 
+// Initialize app
+
+function init() {
+    renderImage()
+    renderAsteroids()
+    renderRoverPhotos()
+    renderAstronaughts()
+}
+
 
 // event listeners
+
+document.body.onload = init

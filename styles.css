@@ -12,6 +12,10 @@ html {
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Roboto", sans-serif;
+}
+
 .wrapper {
     width: 95%;
     margin: 0 auto;
@@ -22,6 +26,14 @@ html {
 .hero {
     padding-top: 5em;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.hero-wave {
+    position: absolute;
+    display: block;
+    transform: rotate(180deg)
 }
 
 .hero-illustration {
@@ -32,9 +44,41 @@ html {
     height: 100vh;
 }
 
+.main-content {
+    margin-top: 10rem;
+}
+
 .main-heading {
-    font-size: 2.5rem;
-    text-align: center;
+    font-size: 3rem;
+    font-family: "Bangers";
+    letter-spacing: 2.5px;
+}
+
+.main-subheading {
+    margin-top: 1em;
+    font-size: 1.2rem;
+    line-height: 30px;
+    color: gray;
+    margin-bottom: 2em;
+}
+
+.main-btn {
+    padding: 1rem 4rem;
+    border: 1px solid black;
+    border-radius: 12px;
+    color: #fff;
+    background: darkblue;
+    font-family: "Bangers";
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-decoration: none;
+}
+
+.main-illustration {
+    width: 45%;
+    transform: rotate(-45deg);
+    padding-top: 6.5em;
+    max-width: 400px;
 }
 
 /* Asterdoid section */
