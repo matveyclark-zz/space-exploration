@@ -1,3 +1,4 @@
+
 // constants 
 
 let today = new Date()
@@ -9,6 +10,7 @@ const imageSection = document.querySelector('.iotd')
 const asteroidContainer = document.querySelector('.wrapper.asteroids')
 const roverPhotosContainer = document.querySelector('.rover-photos')
 const astronaughtContainer = document.querySelector('.wrapper.astros')
+const ctaBtn = document.querySelector('.main-btn')
 
 // api
 
@@ -49,8 +51,8 @@ function createAsteroid(asteroid) {
     const div = document.createElement('div')
     div.classList.add('asteroid')
 
-    const p = document.createElement('p')
-    p.textContent = asteroid.name
+    // const p = document.createElement('p')
+    // p.textContent = asteroid.name
 
     const img = document.createElement('img')
     img.classList.add('asteroid-icon')
@@ -60,8 +62,13 @@ function createAsteroid(asteroid) {
         img.src = '/images/asteroid_safe.svg'
     }
     
-    div.append(p, img)
+    div.append(img)
     asteroidContainer.append(div)
+
+    img.addEventListener('click', () => {
+        let tl = gsap.timeline()
+        tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 5)", y: "random(-300, 300, 5)", ease: 'elastic', rotate: 360})
+    })
 }
 
     // render asteroids
@@ -130,7 +137,20 @@ function init() {
     renderAstronaughts()
 }
 
+init()
+
 
 // event listeners
 
-document.body.onload = init
+ctaBtn.addEventListener("mouseover", (e) => {
+    gsap.to(".main-illustration", 2, {y: -50, x: -50, rotate: -60, ease: "elastic"})
+});
+
+ctaBtn.addEventListener('mouseout', (e) => {
+    gsap.to(".main-illustration", 2, {y: 0, x: 0, rotate: -45, ease: "elastic"})
+})
+
+
+
+
+
