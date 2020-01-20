@@ -4,9 +4,11 @@ let today = new Date()
 const pictureOfTheDayURI = 'https://api.nasa.gov/planetary/apod?api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe'
 const asteroidsURI = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${today.getFullYear()}-0${(today.getMonth()+1)}-0${today.getDate()}&end_date=${today.getFullYear()}-${(0 + today.getMonth()+1)}-${today.getDate() + 1}&api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe`
 const marsRoverURI = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=2539&page=2&api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe'
+const astrosURI = 'http://api.open-notify.org/astros.json'
 const imageSection = document.querySelector('.iotd')
-const asteroidContainer = document.querySelector('.asteroid')
+const asteroidContainer = document.querySelector('.wrapper.asteroids')
 const roverPhotosContainer = document.querySelector('.rover-photos')
+const astronaughtContainer = document.querySelector('.wrapper.astros')
 
 // api
 
@@ -41,6 +43,9 @@ function renderImage() {
     // create asteroids
 
 function createAsteroid(asteroid) {
+    const div = document.createElement('div')
+    div.classList.add('asteroid')
+
     const p = document.createElement('p')
     p.textContent = asteroid.name
 
@@ -52,7 +57,8 @@ function createAsteroid(asteroid) {
         img.src = '/images/asteroid_safe.svg'
     }
     
-    asteroidContainer.append(p, img)
+    div.append(p, img)
+    asteroidContainer.append(div)
 }
 
     // render asteroids
@@ -79,6 +85,36 @@ function createRoverPhoto(photo) {
 function renderRoverPhotos() {
     get(marsRoverURI).then(obj => {
         obj.photos.forEach(createRoverPhoto)
+    })
+}
+
+    // create astronaughts
+
+function createAstronaughts(astro) {
+    const div = document.createElement('div')
+    div.classList.add('astronaught')
+
+    const p = document.createElement('p')
+    p.classList.add('astro-name')
+    p.textContent = astro.name
+
+    const pCraft = document.createElement('p')
+    pCraft.classList.add('astro-craft')
+    pCraft.textContent = astro.craft
+
+    const img = document.createElement('img')
+    img.classList.add('astro-icon')
+    img.src = '/images/astronaut.svg'
+
+    div.append(p, pCraft, img)
+    astronaughtContainer.append(div)
+}
+
+    // render astronaughts
+
+function renderAstronaughts() {
+    get(astrosURI).then(obj => {
+        obj.people.forEach(createAstronaughts)
     })
 }
 
