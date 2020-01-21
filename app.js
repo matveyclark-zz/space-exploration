@@ -64,6 +64,11 @@ function createAsteroid(asteroid) {
     const div = document.createElement('div')
     div.classList.add('asteroid')
 
+    const p = document.createElement('p')
+    p.classList.add('asteroid-name')
+    p.textContent = asteroid.name
+    p.style.display = 'none'
+
     const img = document.createElement('img')
     img.classList.add('asteroid-icon')
     if(asteroid.is_potentially_hazardous_asteroid === true) {
@@ -71,8 +76,10 @@ function createAsteroid(asteroid) {
     } else {
         img.src = '/images/asteroid_safe.svg'
     }
+
+    img.addEventListener('click', showAsteroidName)
     
-    div.append(img)
+    div.append(img, p)
     asteroidContainer.append(div)
 }
 
@@ -83,6 +90,13 @@ function renderAsteroids() {
         let asteroids = obj.near_earth_objects[Object.keys(obj.near_earth_objects)[0]].concat(obj.near_earth_objects[Object.keys(obj.near_earth_objects)[1]])
         asteroids.forEach(createAsteroid)
     })
+}
+
+    // show asteroid name on hover
+
+function showAsteroidName(e) {
+    document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.children[1].style.display = 'none')
+    e.target.parentElement.children[1].style.display = 'inline-block'
 }
 
     // create mars rover photos
