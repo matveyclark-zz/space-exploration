@@ -29,16 +29,26 @@ function createImageOfTheDay(image) {
     const h2 = document.createElement('h2')
     h2.classList.add('iotd-title')
     h2.textContent = image.title
+    imageSection.append(h2)
 
-    const img = document.createElement('img')
-    img.classList.add('daily-image')
-    img.src = image.url
+    if(image.media_type === 'video') {
+        const iframe = document.createElement('iframe')
+        iframe.setAttribute("src", `${image.url}&autoplay=1`)
+        iframe.setAttribute('height', '400px')
+        iframe.classList.add('daily-image')
+        imageSection.append(iframe)
+    } else {
+        const img = document.createElement('img')
+        img.classList.add('daily-image')
+        img.src = image.url
+        imageSection.append(img)
+    }
 
     const p = document.createElement('p')
     p.classList.add('iotd-description')
     p.textContent = image.explanation
 
-    imageSection.append(h2, img, p)
+    imageSection.append(p)
 }
 
     // render image of the day 
@@ -52,9 +62,6 @@ function renderImage() {
 function createAsteroid(asteroid) {
     const div = document.createElement('div')
     div.classList.add('asteroid')
-
-    // const p = document.createElement('p')
-    // p.textContent = asteroid.name
 
     const img = document.createElement('img')
     img.classList.add('asteroid-icon')
@@ -150,12 +157,12 @@ ctaBtn.addEventListener('mouseout', (e) => {
 asteroidUnderline.addEventListener('click', (e) => {
     e.target.parentElement.style.display = 'none'
     earthIcon.style.display = 'block'
-    // asteroidDiv.style.display = 'block'
-    let tl = gsap.timeline()
-    tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 20)", y: "random(-300, 300, 20)", opacity: 1, stagger: .1, ease: 'elastic', rotate: 360})
     document.querySelectorAll('.asteroid').forEach(asteroid => {
         asteroid.style.display = 'block'
     })
+    let tl = gsap.timeline()
+    tl.from(".earth-icon", 1, {scale: 0, ease: "elastic"})
+    tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 20)", y: "random(-300, 300, 20)", opacity: 1, stagger: .1, ease: 'elastic', rotate: 360})
 })
 
 
