@@ -102,13 +102,11 @@ body {
     text-align: center;
     margin-top: 1.5em;
     position: relative;
-    display: inline-block;
-    margin-left: 35%;
 }
 
 .iotd-title::before {
     content: "";
-    width: 100%;
+    width: 360px;
     height: 6px;
     background-color: darkblue;
     position: absolute;
@@ -201,6 +199,25 @@ body {
     opacity: 0;
 }
 
+.meteor{
+    position: absolute;
+    width: 10%;
+    top: 80%;
+    left: -2%;
+    transform: rotate(-70deg);
+}
+
+.meteor-2 {
+    position: absolute;
+    width: 10%;
+    right: 0;
+    top: 0;
+}
+
+.meteor-shake {
+    animation: vibrate .3s infinite;
+}
+
 /* Rover photos section */
 
 .rover-photos {
@@ -258,6 +275,33 @@ body {
     90% {
     -webkit-transform: translateY(-6.4px);
             transform: translateY(-6.4px);
+    }
 }
+
+@keyframes vibrate {
+0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+}
+20% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+}
+40% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+}
+60% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+}
+80% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+}
+100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+    }
 }
 

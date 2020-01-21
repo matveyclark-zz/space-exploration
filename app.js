@@ -155,12 +155,14 @@ ctaBtn.addEventListener('mouseout', (e) => {
 })
 
 asteroidUnderline.addEventListener('click', (e) => {
-    e.target.parentElement.style.display = 'none'
     earthIcon.style.display = 'block'
     document.querySelectorAll('.asteroid').forEach(asteroid => {
         asteroid.style.display = 'block'
     })
     let tl = gsap.timeline()
+    tl.to(".asteroid-warning", .3, {opacity: 0})
+    tl.to('.meteor', .1, {opacity: 0})
+    tl.to('.meteor-2', .1, {opacity: 0})
     tl.from(".earth-icon", 1, {scale: 0, ease: "elastic"})
     tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 20)", y: "random(-300, 300, 20)", opacity: 1, stagger: .1, ease: 'elastic', rotate: 360})
 })
