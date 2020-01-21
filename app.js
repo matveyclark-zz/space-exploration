@@ -4,12 +4,13 @@
 let today = new Date()
 const pictureOfTheDayURI = 'https://api.nasa.gov/planetary/apod?api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe'
 const asteroidsURI = `https://api.nasa.gov/neo/rest/v1/feed?start_date=${today.getFullYear()}-0${(today.getMonth()+1)}-0${today.getDate()}&end_date=${today.getFullYear()}-${(0 + today.getMonth()+1)}-${today.getDate() + 1}&api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe`
-const marsRoverURI = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=2539&page=2&api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe'
+const marsRoverURI = 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3&api_key=Eja2wKokHAlZqpnulA7GXhMyRgJhp7saFdZlqLxe'
 const astrosURI = 'http://api.open-notify.org/astros.json'
 const imageSection = document.querySelector('.iotd')
 const asteroidContainer = document.querySelector('.wrapper.asteroids')
 const roverPhotosContainer = document.querySelector('.rover-photos')
-const astronaughtContainer = document.querySelector('.wrapper.astros')
+const astronaughtContainer = document.querySelector('.astros-container')
+const astroNumber = document.querySelector('.num-of-astros')
 const ctaBtn = document.querySelector('.main-btn')
 const asteroidUnderline = document.querySelector('.underline')
 const earthIcon = document.querySelector('.earth-icon')
@@ -33,7 +34,7 @@ function createImageOfTheDay(image) {
 
     if(image.media_type === 'video') {
         const iframe = document.createElement('iframe')
-        iframe.setAttribute("src", `${image.url}&autoplay=1`)
+        iframe.setAttribute("src", image.url)
         iframe.setAttribute('height', '400px')
         iframe.classList.add('daily-image')
         imageSection.append(iframe)
@@ -128,33 +129,22 @@ function createAstronaughts(astro) {
 
 function renderAstronaughts() {
     get(astrosURI).then(obj => {
+        astroNumber.textContent = obj.people.length
         obj.people.forEach(createAstronaughts)
     })
 }
 
-// Initialize app
-
-function init() {
-    renderImage()
-    renderAsteroids()
-    renderRoverPhotos()
-    renderAstronaughts()
-}
-
-init()
-
-
 // event listeners
 
-ctaBtn.addEventListener("mouseover", (e) => {
+ctaBtn.addEventListener("mouseover", () => {
     gsap.to(".main-illustration", 2, {y: -50, x: -50, rotate: -60, ease: "elastic"})
 });
 
-ctaBtn.addEventListener('mouseout', (e) => {
+ctaBtn.addEventListener('mouseout', () => {
     gsap.to(".main-illustration", 2, {y: 0, x: 0, rotate: -45, ease: "elastic"})
 })
 
-asteroidUnderline.addEventListener('click', (e) => {
+asteroidUnderline.addEventListener('click', () => {
     earthIcon.style.display = 'block'
     document.querySelectorAll('.asteroid').forEach(asteroid => {
         asteroid.style.display = 'block'
@@ -166,6 +156,19 @@ asteroidUnderline.addEventListener('click', (e) => {
     tl.from(".earth-icon", 1, {scale: 0, ease: "elastic"})
     tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 20)", y: "random(-300, 300, 20)", opacity: 1, stagger: .1, ease: 'elastic', rotate: 360})
 })
+
+// initialize app
+
+function init() {
+    renderImage()
+    renderAsteroids()
+    renderRoverPhotos()
+    renderAstronaughts()
+}
+
+init()
+
+
 
 
 

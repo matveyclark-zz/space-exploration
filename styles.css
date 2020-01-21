@@ -159,7 +159,7 @@ body {
 /* Asterdoid section */
 
 .asteroids {
-    padding: 9em 0;
+    padding: 12em 0;
     position: relative;
 }
 
@@ -223,6 +223,8 @@ body {
 .rover-photos {
     display: flex;
     flex-wrap: wrap;
+    margin: 2.5em 0;
+    justify-content: center;
 }
 
 .rover-photo {
@@ -232,15 +234,53 @@ body {
 
 /* Astronaughts section */
 
+.astros-in-space {
+    position: relative;
+}
+
 .astronaught {
     width: 15%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .astro-icon {
-    width: 100%;
+    width: 40%;
+}
+
+.black-hole {
+    margin: 3em auto;
+    display: block;
+    width: 45%;
+    animation: rotate 3s linear infinite;
+}
+
+.image-container {
+    position: relative;
+}
+
+.astros-container {
+    display: flex;
+    justify-content: center;
+}
+
+.num-of-astros {
+    position: absolute;
+    top: 38%;
+    right: 47.5%;
+    font-size: 6rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.blob-3 {
+    position: absolute;
+    transform: rotate(35deg);
+    width: 40%;
+    left: -20%;
+    top: -50%;
 }
 
 /* Animations */
@@ -302,6 +342,16 @@ body {
 100% {
     -webkit-transform: translate(0);
             transform: translate(0);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0)
+    }
+
+    100% {
+        transform: rotate(360deg)
     }
 }
 
