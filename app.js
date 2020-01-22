@@ -1,4 +1,3 @@
-
 // constants 
 
 let today = new Date()
@@ -21,10 +20,9 @@ function get(url) {
     return fetch(url).then(resp => resp.json())
 }
 
-
 // functions
 
-    // create image of the day 
+// create image of the day 
 
 function createImageOfTheDay(image) {
     const h2 = document.createElement('h2')
@@ -32,7 +30,7 @@ function createImageOfTheDay(image) {
     h2.textContent = image.title
     imageSection.append(h2)
 
-    if(image.media_type === 'video') {
+    if (image.media_type === 'video') {
         const iframe = document.createElement('iframe')
         iframe.setAttribute("src", image.url)
         iframe.setAttribute('height', '400px')
@@ -52,13 +50,13 @@ function createImageOfTheDay(image) {
     imageSection.append(p)
 }
 
-    // render image of the day 
+// render image of the day 
 
 function renderImage() {
     get(pictureOfTheDayURI).then(createImageOfTheDay)
 }
 
-    // create asteroids
+// create asteroids
 
 function createAsteroid(asteroid) {
     const div = document.createElement('div')
@@ -66,24 +64,27 @@ function createAsteroid(asteroid) {
 
     const p = document.createElement('p')
     p.classList.add('asteroid-name')
-    p.textContent = asteroid.name
     p.style.display = 'none'
+    p.textContent = asteroid.name
 
     const img = document.createElement('img')
     img.classList.add('asteroid-icon')
-    if(asteroid.is_potentially_hazardous_asteroid === true) {
+    if (asteroid.is_potentially_hazardous_asteroid === true) {
         img.src = '/images/asteroid_danger.svg'
     } else {
         img.src = '/images/asteroid_safe.svg'
     }
 
-    img.addEventListener('click', showAsteroidName)
-    
     div.append(img, p)
     asteroidContainer.append(div)
+
+    img.addEventListener('click', () => {
+        document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.children[1].style.display = 'none')
+        p.style.display = 'block'
+    })
 }
 
-    // render asteroids
+// render asteroids
 
 function renderAsteroids() {
     get(asteroidsURI).then(obj => {
@@ -92,14 +93,7 @@ function renderAsteroids() {
     })
 }
 
-    // show asteroid name on hover
-
-function showAsteroidName(e) {
-    document.querySelectorAll('.asteroid').forEach(asteroid => asteroid.children[1].style.display = 'none')
-    e.target.parentElement.children[1].style.display = 'inline-block'
-}
-
-    // create mars rover photos
+// create mars rover photos
 
 function createRoverPhoto(photo) {
     const img = document.createElement('img')
@@ -109,7 +103,7 @@ function createRoverPhoto(photo) {
     roverPhotosContainer.append(img)
 }
 
-    // render mars rover photos
+// render mars rover photos
 
 function renderRoverPhotos() {
     get(marsRoverURI).then(obj => {
@@ -117,7 +111,7 @@ function renderRoverPhotos() {
     })
 }
 
-    // create astronaughts
+// create astronaughts
 
 function createAstronaughts(astro) {
     const div = document.createElement('div')
@@ -139,7 +133,7 @@ function createAstronaughts(astro) {
     astronaughtContainer.append(div)
 }
 
-    // render astronaughts
+// render astronaughts
 
 function renderAstronaughts() {
     get(astrosURI).then(obj => {
@@ -151,11 +145,11 @@ function renderAstronaughts() {
 // event listeners
 
 ctaBtn.addEventListener("mouseover", () => {
-    gsap.to(".main-illustration", 2, {y: -50, x: -50, rotate: -60, ease: "elastic"})
+    gsap.to(".main-illustration", 2, { y: -50, x: -50, rotate: -60, ease: "elastic" })
 });
 
 ctaBtn.addEventListener('mouseout', () => {
-    gsap.to(".main-illustration", 2, {y: 0, x: 0, rotate: -45, ease: "elastic"})
+    gsap.to(".main-illustration", 2, { y: 0, x: 0, rotate: -45, ease: "elastic" })
 })
 
 asteroidUnderline.addEventListener('click', () => {
@@ -164,11 +158,11 @@ asteroidUnderline.addEventListener('click', () => {
         asteroid.style.display = 'block'
     })
     let tl = gsap.timeline()
-    tl.to(".asteroid-warning", .3, {opacity: 0})
-    tl.to('.meteor', .1, {opacity: 0})
-    tl.to('.meteor-2', .1, {opacity: 0})
-    tl.from(".earth-icon", 1, {scale: 0, ease: "elastic"})
-    tl.to(".asteroid-icon", 2, {x: "random(-300, 300, 20)", y: "random(-300, 300, 20)", opacity: 1, stagger: .1, ease: 'elastic', rotate: 360})
+    tl.to(".asteroid-warning", .3, { opacity: 0 })
+    tl.to('.meteor', .1, { opacity: 0 })
+    tl.to('.meteor-2', .1, { opacity: 0 })
+    tl.from(".earth-icon", 1, { scale: 0, ease: "elastic" })
+    tl.to(".asteroid-icon", 2, { x: "random(-300, 300, 20)", y: "random(-300, 300, 20)", opacity: 1, stagger: .1, ease: 'elastic', rotate: 360 })
 })
 
 // initialize app
@@ -181,10 +175,3 @@ function init() {
 }
 
 init()
-
-
-
-
-
-
-
