@@ -88,7 +88,6 @@ body {
     padding-top: 6.5em;
     max-width: 400px;
 }
-
 /* Image of the day section */
 
 .section-title {
@@ -139,14 +138,10 @@ body {
 }
 
 .iotd-description {
-    width: 25%;
-    text-align: center;
+    width: 90%;
     margin: 0 auto;
-    position: absolute;
-    top: 25%;
-    right: 0;
-    background-color: rgba(173,216,230, .6);
-    display: none;
+    color: gray;
+    text-align: center;
 }
 
 /* Asterdoid section */
